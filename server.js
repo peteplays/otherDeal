@@ -2,7 +2,6 @@ var express     = require('express'),
     bodyParser  = require("body-parser"),
     favicon     = require('serve-favicon'),
     app         = express(),
-    path        = require('path'),
     port        = process.env.OPENSHIFT_NODEJS_PORT || 5555,
     ip          = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
@@ -17,10 +16,9 @@ app .use(express.static('resources'))
 app.get('/',function(req,res){
     res.setHeader('Content-Type', 'application/json');
     res.sendFile('index');
-    //res.sendFile(path.join(__dirname + '/www/indexp.html'));
 });
 
-var mongoDBConnection = require('./resources/db/mongodb/mongoDBConnection.js');
-mongoDBConnection(app);
+var db = require('./resources/db/mongodb/mongoDBConnection.js');
+db(app);
 
 app.listen(port, ip);

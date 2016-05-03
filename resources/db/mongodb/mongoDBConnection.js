@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient,
     _           = require('underscore'),
-    mongoUrl    = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017'
-    db          = 'thedeal',
+    mongoUrl    = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/',
+    db          = 'deal',
     collection  = 'docs';
 
 module.exports = function(app) {
