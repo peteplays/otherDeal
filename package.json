@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "prestart": "gulp build",
-    "start": "node server.js"
+    "start": "gulp build && node server.js"
   },
   "repository": {
     "type": "git",
