@@ -1,0 +1,108 @@
+@bg : #777;
+@bg-blue-opacity: rgba(0, 68, 102, 0.43);
+@yellow-font: #EEDD5B;
+body {
+    background-color: @bg;
+    background-image: url('../images/black-thread-light.png');
+    font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3{
+    text-align: center;
+    color:#eee;
+}
+h1{
+    font-family: 'PT Sans', sans-serif
+}
+h3{
+    small{
+        color:#ccc;
+        font-style: italic;
+    }
+}
+h4{
+    color: @yellow-font;
+}
+img{
+    margin: 0 auto;
+    display: block;
+    width: 130px;
+}
+input{
+    text-align: center;
+    &:hover{
+        text-align: left;
+    }
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus{
+    outline: none;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+.cursor-default{
+    &:hover{
+        cursor: default;
+    }
+}
+.well{
+    background-color: @bg-blue-opacity;
+    border: 1px solid darken(@bg-blue-opacity, 20%);
+    color: @yellow-font;
+}
+.plays-input-group{
+    display: inline;
+    width: 120px;
+    margin-left: -3px;
+}
+.the-icons{
+    font-size: 40px;
+    color: #EEA778;
+    text-shadow: 2px 2px #333;
+}
+.helloABS{
+    margin-bottom: 20px;
+}
+.db-record-count{
+    height: 45px;
+    background-color: @bg-blue-opacity;
+    border: 1px solid darken(@bg-blue-opacity, 20%);
+    border-radius: 3px;
+    padding: 10px;
+    width: 50%;
+    margin: 0 auto 16px;
+    text-align: center;
+}
+.db-list{
+    margin-bottom: 15px;
+    ul{
+        list-style: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .row,
+    input{
+        margin-top: 5px;
+    }
+    .db-record-count{
+        height: 61px;
+    }
+    .display-full-db-data{
+        margin-top: 10px;
+    }
+    .center-btn-group{
+        margin-top: 5px;
+        text-align: center;
+        input{
+            margin-top: 0;
+        }
+    }
+    .smaller-screen-outline-containers{
+        border: 1px dashed rgba(240, 173, 78, 0.61);
+        padding: 7px 0;
+        border-radius: 4px;
+        box-shadow: 2px 2px 2px #555, -1px -1px 2px #666;
+        margin: 14px 0;
+    }
+}

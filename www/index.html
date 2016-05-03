@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <title>The Deal Template</title>
+    <link rel="stylesheet" href="css/bundle.css">
+  </head>
+  <body ng-app="theApp">
+
+    <h1>peteplays!!!</h1>
+
+    <img src="images/petelogo.png" alt="peteplays logo">
+
+    <h2>This is the <kbd>www/</kbd> <code>index.html</code></h2>
+
+    <!-- js -->
+    <h3 id="helloFromJs"></h3>
+
+    <!-- fa & bs font icons -->
+    <div class="text-center the-icons">
+      <h3>Font Awesome and Bootstrap Glyphicons</h3>
+      <i class="fa fa-fighter-jet"></i>
+      <i class="fa fa-ellipsis-h"></i>
+      <i class="fa fa-fort-awesome"></i>
+      <i class="glyphicon glyphicon-music"></i>
+      <i class="glyphicon glyphicon-send"></i>
+    </div>
+
+    <div ng-controller="template">
+
+      <!-- angular -->
+      <h3>{{hello}}</h3>
+
+      <!-- angular-ui-bootstrap -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-offset-5 col-sm-2 helloABS">
+            <button type="button" class="btn btn-default btn-block" ng-click="isCollapsed = !isCollapsed">Hello From...</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-4 col-sm-4">
+            <div uib-collapse="isCollapsed">
+              <div class="well text-center text-warning">
+                <strong>Angular UI Bootstrap</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- db -->
+      <div class="container" ng-show="dbActive">
+        <h4 class="db-record-count" ng-show="outputDBCountRes">
+          <i class="fa fa-database"></i>
+          There are {{outputDBCountRes}} records in the collection
+          <i class="fa fa-database"></i>
+        </h4>
+        <div class="row db-list" ng-class="{'smaller-screen-outline-containers':outputGetData}">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button ng-click="getAllNames();" class="btn btn-warning btn-block">Get All Names</button>
+          </div>
+          <div class="col-sm-5 display-full-db-data" ng-show="outputGetData">
+            <ul class="well">
+              <li ng-repeat="val in outputGetData track by $index">
+                <span class="capitalize">{{val.name}}</span>
+                likes {{val.color}}.
+                Fun... Survey says...
+                <em>{{val.fun}}</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row db-list" ng-class="{'smaller-screen-outline-containers':inputFeedback}">
+          <h4 class="text-center" ng-show="inputFeedback">
+            <kbd>{{inputFeedback}}</kbd>
+          </h4>
+        </div>
+        <div class="row db-list smaller-screen-outline-containers">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button ng-disabled="findNameVal == null || findNameVal == ''" ng-click="postFindName(findNameVal); clearInput(['findNameVal']);" class="btn btn-warning btn-block">Find a Name</button>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" ng-model="findNameVal" class="form-control" placeholder="Name" ng-keydown="$event.which === 13 && submitOnEnter('postFindName', [findNameVal], ['findNameVal']);">
+          </div>
+        </div>
+        <div class="row db-list smaller-screen-outline-containers">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button ng-disabled="newNameName == null || newNameName == '' || newNameAddColor == null || newNameAddColor == '' || newNameAddFun == null" ng-click="postInsertName(newNameName, newNameAddColor, newNameAddFun); clearInput(['newNameName', 'newNameAddColor','newNameAddFun']);" class="btn btn-warning btn-block">Add a Name</button>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" ng-model="newNameName" class="form-control" placeholder="Name" ng-keydown="$event.which === 13 && submitOnEnter('postInsertName', [newNameName, newNameAddColor, newNameAddFun], ['newNameName', 'newNameAddColor','newNameAddFun']);">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" ng-model="newNameAddColor" placeholder="Color" ng-keydown="$event.which === 13 && submitOnEnter('postInsertName', [newNameName, newNameAddColor, newNameAddFun], ['newNameName', 'newNameAddColor','newNameAddFun']);">
+          </div>
+          <div class="col-sm-3 center-btn-group">
+            <div class="btn-group">
+              <button class="btn btn-default cursor-default" ng-model="newNameAddFun" uib-btn-radio disabled>Fun:</button>
+              <button class="btn btn-warning" ng-model="newNameAddFun" uib-btn-radio="'Yes'">Yes</button>
+              <button class="btn btn-warning" ng-model="newNameAddFun" uib-btn-radio="'No'">No</button>
+            </div>
+          </div>
+        </div>
+        <div class="row db-list smaller-screen-outline-containers">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button ng-disabled="deleteNameVal == null || deleteNameVal == ''" ng-click="postDeleteName(deleteNameVal); clearInput(['deleteNameVal']);" class="btn btn-warning btn-block">Delete a Name</button>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" ng-model="deleteNameVal" class="form-control" placeholder="Name" ng-keydown="$event.which === 13 && submitOnEnter('postDeleteName', [deleteNameVal], ['deleteNameVal']);">
+          </div>
+        </div>
+        <div class="row db-list smaller-screen-outline-containers">
+          <div class="col-sm-offset-1 col-sm-3">
+            <button ng-disabled="nameToUpdate == null || updateField == null || updateVal == null || nameToUpdate == '' || updateVal == ''" ng-click="postUpdateVal(nameToUpdate, updateField, updateVal); clearInput(['nameToUpdate', 'updateField', 'updateVal']);" class="btn btn-warning btn-block">Update Color or Fun</button>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" ng-model="nameToUpdate" class="form-control" placeholder="Name" ng-keydown="$event.which === 13 && submitOnEnter('postUpdateVal', [nameToUpdate, updateField, updateVal], ['nameToUpdate', 'updateField', 'updateVal']);">
+          </div>
+          <div class="col-sm-6 center-btn-group">
+            <div class="btn-group">
+              <button class="btn btn-warning" ng-model="updateField" uib-btn-radio="'Color'">Color</button>
+              <button class="btn btn-warning" ng-model="updateField" uib-btn-radio="'Fun'">Fun</button>
+              <input  type="text" ng-model="updateVal" class="form-control plays-input-group" placeholder="{{updateField}}" ng-keydown="$event.which === 13 && submitOnEnter('postUpdateVal', [nameToUpdate, updateField, updateVal], ['nameToUpdate', 'updateField', 'updateVal']);">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- ang template -->
+
+    <script src="js/bundle.js"></script>
+  </body>
+</html>
